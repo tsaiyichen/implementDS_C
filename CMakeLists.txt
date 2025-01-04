@@ -10,3 +10,7 @@ add_library(Stack_LL CH3/Stack_LL.cpp CH3/Stack_LL.hpp)
 add_executable(Stack CH3/Stack_testing.cpp)
 target_include_directories(Stack PUBLIC CH3)
 target_link_libraries(Stack PUBLIC Stack_LL Stack_array)
+add_library(Queue_Array CH3/Queue_array.cpp CH3/Queue_array.hpp
+        CH3/Queue_LL.cpp
+        CH3/Queue_LL.hpp)
+add_library(Queue_LL CH3/Queue_LL.cpp CH3/Queue_LL.hpp)
