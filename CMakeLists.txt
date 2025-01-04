@@ -5,3 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Ch1 CH1/CH1_main.cpp)
 add_executable(Ch2 CH2/Matrix.cpp)
+add_library(Stack_array CH3/Stack_Array.cpp)
+add_library(Stack_LL CH3/Stack_LL.cpp CH3/Stack_LL.hpp)
+add_executable(Stack CH3/Stack_testing.cpp)
+target_include_directories(Stack PUBLIC CH3)
+target_link_libraries(Stack PUBLIC Stack_LL Stack_array)
