@@ -14,3 +14,7 @@ add_library(Queue_Array CH3/Queue_array.cpp CH3/Queue_array.hpp
         CH3/Queue_LL.cpp
         CH3/Queue_LL.hpp)
 add_library(Queue_LL CH3/Queue_LL.cpp CH3/Queue_LL.hpp)
+add_library(QandS CH3/QueueANDStack.cpp CH3/QueueANDStack.hpp)
+add_executable(CH3Main CH3/CH3Main.cpp)
+target_include_directories(CH3Main PUBLIC CH3)
+target_link_libraries(CH3Main PUBLIC QandS)
