@@ -29,3 +29,9 @@ add_library(Heap CH5/Heap.cpp CH5/Heap.hpp)
 add_executable(heapMain CH5/heapMain.cpp)
 target_include_directories(heapMain PUBLIC CH5)
 target_link_libraries(heapMain PUBLIC Heap)
+
+add_library(Sorting CH7/Sorting.cpp CH7/Sorting.hpp)
+add_executable(sortingMain CH7/sortingMain.cpp)
+target_include_directories(sortingMain PUBLIC CH7)
+target_link_libraries(sortingMain PUBLIC Sorting)
+
