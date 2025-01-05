@@ -14,10 +14,15 @@ private:
     int V; //number of vertices
     vector<list<pair<int, int>>> adjList; //pair(vertices no, cost)
     int E = 0; //number of edges
+    vector<bool> visited;
 public:
     explicit Graph(vector<vector<int>> m);
     void printMatrix();
     void printList();
+    void DFS_recursive(int start);
+    void flush();
+    void DFS_stack(int start);
+    void BFS(int start);
 };
 
 

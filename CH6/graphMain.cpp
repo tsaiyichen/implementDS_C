@@ -13,4 +13,11 @@ int main(){
     Graph g(m);
     g.printMatrix();
     g.printList();
+    cout << "DFS_recursive: " << endl;
+    g.DFS_recursive(0);
+    cout << endl << "DFS_stack: " << endl;
+    g.DFS_stack(0);
+    cout << endl << "BFS: " << endl;
+    g.BFS(0);
+
 }
