@@ -35,3 +35,7 @@ add_executable(sortingMain CH7/sortingMain.cpp)
 target_include_directories(sortingMain PUBLIC CH7)
 target_link_libraries(sortingMain PUBLIC Sorting)
 
+add_library(hash CH8/HashTable.cpp CH8/HashTable.hpp)
+add_executable(hashTableMain CH8/hashTableMain.cpp)
+target_include_directories(sortingMain PUBLIC CH8)
+target_link_libraries(hashTableMain PUBLIC hash)
