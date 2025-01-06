@@ -19,5 +19,6 @@ int main(){
     g.DFS_stack(0);
     cout << endl << "BFS: " << endl;
     g.BFS(0);
-
+    cout << endl << "Kruskal: " << endl;
+    g.Kruskal();
 }

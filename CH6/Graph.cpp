@@ -2,10 +2,13 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <algorithm>
 #include <iomanip>
 #include <queue>
 #include <stack>
+#include <tuple>
 using namespace std;
+
 
 Graph::Graph(vector<vector<int>> m) {
     adjMatrix = m;
@@ -142,4 +145,65 @@ void Graph::BFS(int start) {
 
 void Graph::flush() {
     fill(visited.begin(), visited.end(), false);
+}
+
+void Graph::Kruskal() {
+
+    if(adjMatrix[0][1] != adjMatrix[1][0]) return;
+    vector<tuple<int, int, int>> edgeVector;
+    /*
+    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> pq;
+    for(int i = 0; i < V; i++){
+        for(int j = i + 1; j < V; j++){
+            if(adjMatrix[i][j] != 0 && adjMatrix[i][j] != INF)
+            edgeVector.emplace_back(adjMatrix[i][j], i, j);
+        }
+    }
+
+    for(auto & i : edgeVector){
+        pq.emplace(i);
+    }
+    UnionFind set(V);
+    int count = 0;
+    while(!pq.empty() && count < V - 1){
+        auto [w, i, j] = pq.top();
+        pq.pop();
+        //check cycle
+        if(set.find(i) != set.find(j)){
+            //no cycle
+            set.unite(i, j); //union
+            printf("%d -> %d, weight: %d\n", i, j, w);
+            count++;
+        }else{
+            //discard this edge
+        }
+    }
+    */
+    for(int i = 0; i < V; i++){
+        for(auto &j: adjList[i]){
+            if(i >= j.first){
+                continue;
+            }
+            edgeVector.emplace_back(j.second, i, j.first);
+        }
+    }
+    sort(edgeVector.begin(), edgeVector.end(), [](const auto& a, const auto& b) {
+        return get<0>(a) < get<0>(b);
+    });
+    UnionFind set(V);
+    int count = 0;
+    for(int i = 0; i < edgeVector.size(); i++){
+        auto [w, k, j] = edgeVector[i];
+        if(set.find(k) != set.find(j)){
+            //no cycle
+            set.unite(k, j); //union
+            printf("%d -> %d, weight: %d\n", k, j, w);
+            count++;
+        }else{
+            //discard edge
+        }
+        if(count > V - 1){
+            break;
+        }
+    }
 }
