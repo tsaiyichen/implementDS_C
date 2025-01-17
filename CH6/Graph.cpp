@@ -272,5 +272,78 @@ void Graph::Prim(int s) {
             temp.clear();
         }
     }
+}
 
+void Graph::Dijkstra(int s) {
+    vector<bool> confirm(V, false);
+    vector<int> dist = adjMatrix[s];
+    confirm[s] = true;
+    for(int i = 0; i < V - 2; i++){
+        int minIndex = -1;
+        int minValue = INF;
+        for(int j = 0; j < V; j++){
+            if(!confirm[j] && (dist[j] < minValue)){
+                minIndex = j;
+                minValue = dist[j];
+            }
+        }
+        confirm[minIndex] = true;
+        for(int j = 0; j < V; j++){
+            if(adjMatrix[minIndex][j] != 0 && adjMatrix[minIndex][j] != INF && !confirm[j]){
+                dist[j] = min(dist[j], minValue + adjMatrix[minIndex][j]);
+            }
+        }
+    }
+
+    for(int i = 0; i < V; i++){
+        if(i != s){
+            printf("destination: %d, SPL: %d\n", i, dist[i]);
+        }
+    }
+}
+
+void Graph::BellmanFord(int s) {
+    vector<int> dist = adjMatrix[s];
+    for(int k = 2; k < V; k++){
+        for(int i = 0; i < V; i++){
+            //from s to i
+            for(int j = 0; j < V; j++){
+                if(adjMatrix[j][i] != INF && adjMatrix[j][i] != 0){
+                    if(dist[j] == INF){
+                        dist[i] = INF;
+                        continue;
+                    }
+                    dist[i] = min(dist[i], dist[j] + adjMatrix[j][i]);
+                }
+            }
+        }
+    }
+    printf("source: %d\n", s);
+    for(int i = 0; i < V; i++){
+        if(i != s) printf("destination: %d, SPL: %d\n", i, dist[i]);
+    }
+}
+
+void Graph::FloydWarshall() {
+    vector<vector<int>> A = adjMatrix;
+    for(int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                // from i to j
+                A[i][j] = min(A[i][j], A[i][k] + A[k][j]);
+            }
+        }
+    }
+
+    for(int i = 0; i < V; i++){
+        for(int j = 0; j < V; j++){
+            if(A[i][j] == INF){
+                cout << setw(6) << "INF" << " ";
+            }
+            else{
+                cout << setw(6) << A[i][j] << " ";
+            }
+        }
+        cout << endl;
+    }
 }

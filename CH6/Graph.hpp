@@ -32,6 +32,9 @@ public:
     void BFS(int start);
     void Kruskal();
     void Prim(int s);
+    void Dijkstra(int s);
+    void BellmanFord(int s);
+    void FloydWarshall();
 };
 
 using namespace std;
