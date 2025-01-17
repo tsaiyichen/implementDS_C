@@ -21,4 +21,6 @@ int main(){
     g.BFS(0);
     cout << endl << "Kruskal: " << endl;
     g.Kruskal();
+    cout << endl << "Prim's: " << endl;
+    g.Prim(0);
 }

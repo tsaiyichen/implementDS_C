@@ -31,6 +31,7 @@ public:
     void DFS_stack(int start);
     void BFS(int start);
     void Kruskal();
+    void Prim(int s);
 };
 
 using namespace std;

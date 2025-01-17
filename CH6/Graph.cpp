@@ -7,6 +7,7 @@
 #include <queue>
 #include <stack>
 #include <tuple>
+#include <set>
 using namespace std;
 
 
@@ -206,4 +207,70 @@ void Graph::Kruskal() {
             break;
         }
     }
+}
+
+void Graph::Prim(int s) {
+    if(adjMatrix[0][1] != adjMatrix[1][0]) return;
+    /*
+    set<int> x, y; // x: U, y: V - U
+    x.emplace(s); // U
+    for(int i = 0; i < V; i++){
+        if(i != s) y.emplace(i);
+    }
+
+    while(!y.empty()){
+        int start = -1, end = -1, minWeight = INF;
+        for(int i = 0; i < V; i++){
+            if(x.find(i) != x.end()){
+                for(int j = 0; j < V; j++){
+                    if(y.find(j) != y.end() && adjMatrix[i][j] != INF && adjMatrix[i][j] != 0){
+                        if(adjMatrix[i][j] < minWeight){
+                            minWeight = adjMatrix[i][j];
+                            start = i;
+                            end = j;
+                        }
+                    }
+                }
+            }
+        }
+
+        printf("%d -> %d, weight: %d\n", start, end, minWeight);
+        x.emplace(end);
+        y.erase(end);
+    }
+    */
+    priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> pq;
+    //initialize
+    for(int i = 0; i < V; i++){
+        if(i != s){
+            pq.emplace(INF, i, -1);
+        }else{
+            pq.emplace(0, s, -1);
+        }
+    }
+    while(!pq.empty()){
+        auto [weight, no, p] = pq.top();
+        pq.pop();
+        if(p != -1){
+            printf("%d -> %d, weight: %d\n", p, no, weight);
+        }
+        for(auto &i: adjList[no]){
+            auto cur = i.first;
+            vector<tuple<int, int, int>> temp;
+            while(!pq.empty()){
+                auto [c, a, b] = pq.top();
+                pq.pop();
+                if(a == cur && c > i.second){
+                    pq.emplace(i.second, i.first, no);
+                }else{
+                    temp.emplace_back(c, a, b);
+                }
+            }
+            for(auto &j: temp){
+                pq.emplace(j);
+            }
+            temp.clear();
+        }
+    }
+
 }
