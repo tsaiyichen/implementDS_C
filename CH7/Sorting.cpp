@@ -74,8 +74,8 @@ int Advanced_Sorting::HoarePartition(int *arr, int l, int r) {
     int i = l+1;
     int j = r;
     while(true){
-        while(i <= r && arr[i] <= pk) i++;
-        while(arr[j] >= pk) j--;
+        while(i <= r && arr[i] < pk) i++;
+        while(arr[j] > pk) j--;
         if(i < j){
             arrSwap(arr, j, i);
             i++;j--;
